@@ -36,4 +36,4 @@ dD0iNTAwIj4KPHRleHQgeD0iMCIgeT0iMTUiIGZpbGw9ImJsdWUiPkhpIEkgYW0gUGFuZGl0ITwv
 dGV4dD4KPC9zdmc+
 
 
-forge test --help > forgeHelp.txt
+command - forge test --help > forgeHelp.txt

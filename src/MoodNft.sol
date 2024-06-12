@@ -19,7 +19,7 @@ contract MoodNft is ERC721 {
 
     mapping(uint256 => Mood) private s_tokenIdToMood;
 
-    constructor(s_tokenIdToMood
+    constructor(
         string memory sadSvgImageURI,
         string memory happySvgImageURI
     ) ERC721("Mood NFT", "MN") {
@@ -33,17 +33,21 @@ contract MoodNft is ERC721 {
         s_tokenIdToMood[s_tokenCounter] = Mood.HAPPY;
         s_tokenCounter++;
     }
+
     function flipMood(uint256 tokenId) public {
-        if (getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender) {
+        if (
+            getApproved(tokenId) != msg.sender && ownerOf(tokenId) != msg.sender
+        ) {
             revert MoodNft__CantFlipMoodIfNotOwner();
         }
 
-        if (s_tokenIdToState[tokenId] == Mood.HAPPY) {
-            s_tokenIdToState[tokenId] = Mood.SAD;
+        if (s_tokenIdToMood[tokenId] == Mood.HAPPY) {
+            s_tokenIdToMood[tokenId] = Mood.SAD;
         } else {
-            s_tokenIdToState[tokenId] = Mood.HAPPY;
+            s_tokenIdToMood[tokenId] = Mood.HAPPY;
         }
     }
+
     function _baseURI() internal pure override returns (string memory) {
         return "data:application/json;base64,";
     }
