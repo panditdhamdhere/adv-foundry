@@ -7,11 +7,14 @@ import {DeployMoodNft} from "../../script/DeployMoodNft.s.sol";
 
 contract MoodNftIntegrationTest is Test {
     MoodNft moodNft;
-    string public constant HAPPY_SVG_URI =
+    string public constant HAPPY_SVG_IMAGE_URI =
         "data:image/svg+xml;base64PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgd2lkdGg9IjQwMCIgIGhlaWdodD0iNDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxjaXJjbGUgY3g9IjEwMCIgY3k9IjEwMCIgZmlsbD0ieWVsbG93IiByPSI3OCIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPGcgY2xhc3M9ImV5ZXMiPgogICAgPGNpcmNsZSBjeD0iNjEiIGN5PSI4MiIgcj0iMTIiLz4KICAgIDxjaXJjbGUgY3g9IjEyNyIgY3k9IjgyIiByPSIxMiIvPgogIDwvZz4KICA8cGF0aCBkPSJtMTM2LjgxIDExNi41M2MuNjkgMjYuMTctNjQuMTEgNDItODEuNTItLjczIiBzdHlsZT0iZmlsbDpub25lOyBzdHJva2U6IGJsYWNrOyBzdHJva2Utd2lkdGg6IDM7Ii8+Cjwvc3ZnPg==";
 
-    string public constant SAD_SVG_URI =
+    string public constant SAD_SVG_IMAGE_URI =
         "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8c3ZnIHdpZHRoPSIxMDI0cHgiIGhlaWdodD0iMTAyNHB4IiB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHBhdGggZmlsbD0iIzMzMyIKICAgICAgICBkPSJNNTEyIDY0QzI2NC42IDY0IDY0IDI2NC42IDY0IDUxMnMyMDAuNiA0NDggNDQ4IDQ0OCA0NDgtMjAwLjYgNDQ4LTQ0OFM3NTkuNCA2NCA1MTIgNjR6bTAgODIwYy0yMDUuNCAwLTM3Mi0xNjYuNi0zNzItMzcyczE2Ni42LTM3MiAzNzItMzcyIDM3MiAxNjYuNiAzNzIgMzcyeiIgLz4KICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiCiAgICAgICAgZD0iTTUxMiAxNDBjLTIwNS40IDAtMzcyIDE2Ni42LTM3MiAzNzJzMTY2LjYgMzcyIDM3MiAzNzIgMzcyeiIgLz4KICAgIDxwYXRoIGZpbGw9IiNFNkU2RTYiCiAgICAgICAgZD0iTTI4OCA0MjFhNDguMDEgNDguMDEgMCAwIDEgOTYgMCA0OC4wMSA0OC4wMSAwIDAgMSAwIDk2eiIgLz4KICAgIDxwYXRoIGZpbGw9IiMzMzMiCiAgICAgICAgZD0iTTI4OCA0MjFhNDggNDggMCAxIDAtOTYgMHoiIC8+Cjwvc3ZnPg==";
+
+    string public constant SAD_SVG_URI =
+        "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj4KPHRleHQgeD0iMCIgeT0iMTUiIGZpbGw9ImJsdWUiPkhpIEkgYW0gUGFuZGl0ITwvdGV4dD4KPC9zdmc+";
 
     DeployMoodNft deployer;
 
@@ -35,9 +38,11 @@ contract MoodNftIntegrationTest is Test {
         vm.prank(USER);
         moodNft.flipMood(0);
 
-        assert(
-            keccak256(abi.encodePacked(moodNft.tokenURI(0))) ==
-                keccak256(abi.encodePacked(SAD_SVG_URI))
+        console.log(moodNft.tokenURI(0));
+
+        assertEq(
+            keccak256(abi.encodePacked(moodNft.tokenURI(0))),
+            keccak256(abi.encodePacked(SAD_SVG_URI))
         );
     }
 }
